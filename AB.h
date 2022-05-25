@@ -8,10 +8,27 @@ class AB;
 
 class IteratorAB;
 
+class Nod {
+public:
+	TElem element;
+	Nod* st;
+	Nod* dr;
+	Nod()
+	{
+		element = 0;
+		st = NULL;
+		dr = NULL;
+	}
+};
+
+
 class AB {
 
 private:
 	/* aici e reprezentarea */
+
+	Nod* radacina;
+
 public:
 	friend class IteratorAB;
 	friend class IteratorPreordine;
