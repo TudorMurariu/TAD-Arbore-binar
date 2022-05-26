@@ -230,7 +230,7 @@ void IteratorLatime::urmator(){
 	if (!valid())
 		throw(exception());
 
-	PNod aux = q.back();
+	PNod aux = q.front();
 	q.pop();
 	if (aux->st != NULL)
 		q.push(aux->st);
@@ -238,7 +238,7 @@ void IteratorLatime::urmator(){
 		q.push(aux->dr);
 
 	if (!q.empty())
-		actual = q.back();
+		actual = q.front();
 	else
 		actual = NULL;
 }
