@@ -1,10 +1,17 @@
 #include "AB.h"
 #include "IteratorAB.h"
 
-// Teta(1)
+
 IteratorInordine::IteratorInordine(const AB& _ab):ab(_ab) {
 	actual = NULL;
-	prim();
+	actual = _ab.radacina;
+	while (actual != NULL)
+	{
+		s.push(actual->st);
+		actual = actual->st;
+	}
+	if (!s.empty())
+		element();
 }
 
 
@@ -19,10 +26,10 @@ void IteratorInordine::prim(){
 
 // Teta(1)
 bool IteratorInordine::valid(){
-	return actual != NULL && !s.empty();
+	return actual != NULL;
 }
 
-
+// Teta(1)
 TElem IteratorInordine::element() {
 	if (!valid())
 		throw(exception());
@@ -33,11 +40,28 @@ TElem IteratorInordine::element() {
 void IteratorInordine::urmator(){
 	if (!valid())
 		throw(exception());
-
+	PNod aux = s.top();
+	s.pop();
+	if (actual->dr != NULL)
+	{
+		actual = actual->dr;
+		while (actual != NULL)
+		{
+			s.push(actual);
+			actual = actual->st;
+		}
+	}
+	if (!s.empty())
+	{
+		element();
+	}
+	else
+	{
+		actual = NULL;
+	}
 }
 
 // Teta(1)
-
 IteratorPreordine::IteratorPreordine(const AB& _ab):ab(_ab){
 	actual = NULL;
 	prim();

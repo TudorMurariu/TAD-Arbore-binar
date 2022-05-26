@@ -111,7 +111,11 @@ private:
 
 	const AB& ab;
 	/* aici e reprezentarea specifica a itertorului*/
-	
+	struct el {
+		PNod* p;
+		int k = 0;
+	};
+	stack<PNod> s;
 	PNod actual;
 public:
 
