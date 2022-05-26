@@ -8,7 +8,10 @@ using namespace std;
 
 
 int main() {
-	//testAll();
+	testAll();
+	cout << "Gata teste scurte\n";
 	testAllExtins();
+	cout << "Gata teste extinse\n";
+
 	cout<<"End";
 }
