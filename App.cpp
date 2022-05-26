@@ -8,7 +8,7 @@ using namespace std;
 
 
 int main() {
-	testAll();
-	//testAllExtins();
+	//testAll();
+	testAllExtins();
 	cout<<"End";
 }

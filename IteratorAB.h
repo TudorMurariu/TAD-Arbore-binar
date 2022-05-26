@@ -112,11 +112,11 @@ private:
 	const AB& ab;
 	/* aici e reprezentarea specifica a itertorului*/
 	struct el {
-		PNod* p;
+		PNod p;
 		int k = 0;
 	};
-	stack<PNod> s;
-	PNod actual;
+	stack<el> s;
+	el actual;
 public:
 
 		//reseteaza pozitia iteratorului la inceputul containerului

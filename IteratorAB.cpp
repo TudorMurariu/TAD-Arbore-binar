@@ -10,14 +10,10 @@ IteratorInordine::IteratorInordine(const AB& _ab):ab(_ab) {
 		s.push(actual->st);
 		actual = actual->st;
 	}
-	if (!s.empty())
-		element();
 }
 
 
 void IteratorInordine::prim(){
-	if (!valid())
-		throw(exception());
 	while (!s.empty())
 		s.pop();
 	actual = ab.radacina;
@@ -47,13 +43,15 @@ void IteratorInordine::urmator(){
 		actual = actual->dr;
 		while (actual != NULL)
 		{
+			//se adauga in stiva ramura stanga a elementului curent
 			s.push(actual);
 			actual = actual->st;
 		}
 	}
 	if (!s.empty())
 	{
-		element();
+		// se acceseaza nodul din varful stivei
+		actual = s.top();
 	}
 	else
 	{
@@ -111,34 +109,69 @@ void IteratorPreordine::urmator(){
 		actual = NULL;
 }
 
+// Teta(1)
 IteratorPostordine::IteratorPostordine(const AB& _ab):ab(_ab){
-	/* de adaugat */
+	actual.p = _ab.radacina;
 }
 
-void IteratorPostordine::prim(){
-	/* de adaugat */
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
+void IteratorPostordine::prim(){ ///!
+	while (!s.empty())
+		s.pop();
+	actual.p = ab.radacina;
+	s.push(actual);
 }
 
-
+// Teta(1)
 bool IteratorPostordine::valid(){
-	/* de adaugat */
-	return false;
+	return actual.p != NULL && !s.empty();
 }
 
+// Teta(1)
 TElem IteratorPostordine::element(){
- 	/* de adaugat */
-	return -1;
+	if (!valid())
+		throw(exception());
+	return actual.p->element;
 }
 
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
 void IteratorPostordine::urmator(){
-	/* de adaugat */
+	if (!valid())
+		throw(exception());
+	while (actual.p != NULL)
+	{
+		el x;
+		x.k = 0;
+		x.p = actual.p;
+		s.push(x);
+		actual.p = actual.p->st;
+	}
+
+	el x = s.top();
+	s.pop();
+	if (x.k == 0)
+	{
+		// nu s-a traversat subarborele drept al lui p
+		x.k = 1;
+		s.push(x);
+		actual.p = x.p->dr;
+	}
+	else
+	{
+		actual.p = NULL;
+	}
 }
 
 // Teta(1)
 IteratorLatime::IteratorLatime(const AB& _ab):ab(_ab){
 	actual = NULL;
 	prim();
-	q.push(_ab.radacina);
 }
 
 /// caz favoranil : Teta(1)
@@ -149,6 +182,7 @@ void IteratorLatime::prim(){
 	while (!q.empty())
 		q.pop();
 	actual = ab.radacina;
+	q.push(ab.radacina);
 }
 
 // Teta(1)
