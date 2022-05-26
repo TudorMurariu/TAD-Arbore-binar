@@ -5,11 +5,7 @@
 IteratorInordine::IteratorInordine(const AB& _ab):ab(_ab) {
 	actual = NULL;
 	actual = _ab.radacina;
-	while (actual != NULL)
-	{
-		s.push(actual->st);
-		actual = actual->st;
-	}
+	prim();
 }
 
 
@@ -17,7 +13,16 @@ void IteratorInordine::prim(){
 	while (!s.empty())
 		s.pop();
 	actual = ab.radacina;
-	s.push(ab.radacina);
+	
+	while (actual != NULL)
+	{
+		//se adauga in stiva ramura stanga a elementului curent
+		s.push(actual);
+		actual = actual->st;
+	}
+	//se acceseaza nodul din varful stivei
+	if(!s.empty())
+		actual = s.top();
 }
 
 // Teta(1)
@@ -121,8 +126,31 @@ IteratorPostordine::IteratorPostordine(const AB& _ab):ab(_ab){
 void IteratorPostordine::prim(){ ///!
 	while (!s.empty())
 		s.pop();
+	actual.k = 0;
 	actual.p = ab.radacina;
 	s.push(actual);
+	while (actual.p != NULL)
+	{
+		el x;
+		x.k = 0;
+		x.p = actual.p;
+		s.push(x);
+		actual.p = actual.p->st;
+	}
+
+	//el x = s.top();
+	//s.pop();
+	//if (x.k == 0)
+	//{
+	//	// nu s-a traversat subarborele drept al lui p
+	//	x.k = 1;
+	//	s.push(x);
+	//	actual.p = x.p->dr;
+	//}
+	//else
+	//{
+	//	//actual.p = NULL;
+	//}
 }
 
 // Teta(1)
@@ -164,7 +192,7 @@ void IteratorPostordine::urmator(){
 	}
 	else
 	{
-		actual.p = NULL;
+		//actual.p = NULL;
 	}
 }
 
