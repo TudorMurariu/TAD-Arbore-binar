@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <queue>
 using namespace std;
 
 typedef int TElem;
@@ -19,8 +20,16 @@ public:
 		st = NULL;
 		dr = NULL;
 	}
+	Nod(TElem e, Nod* st1, Nod* dr1)
+	{
+		element = e;
+		st = st1;
+		dr = dr1;
+	}
 };
 
+//se defineste tipul PNod ca fiind adresa unui Nod
+typedef Nod* PNod;
 
 class AB {
 
@@ -28,6 +37,13 @@ private:
 	/* aici e reprezentarea */
 
 	Nod* radacina;
+
+	//functia recursiva pentru distrugerea arborelui
+	void distruge(PNod);
+	//functia recursiva pentru distrugerea subarborilor unui arbore
+	void distrugeSubarbori(PNod);
+	//copiere subarbore
+	PNod copiere(PNod) const;
 
 public:
 	friend class IteratorAB;

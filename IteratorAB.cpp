@@ -23,26 +23,52 @@ void IteratorInordine::urmator(){
 	/* de adaugat */
 }
 
+// Teta(1)
+
 IteratorPreordine::IteratorPreordine(const AB& _ab):ab(_ab){
-	/* de adaugat */
+	actual = NULL;
+	prim();
 }
 
+// Teta(1)
 void IteratorPreordine::prim(){
- 	/* de adaugat */
+	while (!s.empty())
+		s.pop();
+	
+	actual = ab.radacina;
+	s.push(ab.radacina);
 }
 
-
+// Teta(1)
 bool IteratorPreordine::valid(){
-	/* de adaugat */
+	return actual != NULL;
 }
 
+// Teta(1)
 TElem IteratorPreordine::element(){
-	/* de adaugat */
-	return -1;
+	if (!valid())
+		throw(exception());
+
+	return actual->element;
 }
 
+// Teta(1)
 void IteratorPreordine::urmator(){
-	/* de adaugat */
+	if (!valid())
+		throw(exception());
+
+	PNod aux = s.top();
+	s.pop();
+
+	if (aux->dr != NULL)
+		s.push(aux->dr);
+	if (aux->st != NULL)
+		s.push(aux->st);
+
+	if (!s.empty())
+		actual = s.top();
+	else
+		actual = NULL;
 }
 
 IteratorPostordine::IteratorPostordine(const AB& _ab):ab(_ab){
@@ -68,25 +94,46 @@ void IteratorPostordine::urmator(){
 	/* de adaugat */
 }
 
+// Teta(1)
 IteratorLatime::IteratorLatime(const AB& _ab):ab(_ab){
-	/* de adaugat */
+	actual = NULL;
+	prim();
+	q.push(_ab.radacina);
 }
 
+// Teta(1)
 void IteratorLatime::prim(){
-	/* de adaugat */
+	while (!q.empty())
+		q.pop();
+	actual = ab.radacina;
 }
 
-
+// Teta(1)
 bool IteratorLatime::valid(){
-	/* de adaugat */
-	return false;
+	return actual != NULL;
 }
+// Teta(1)
 
 TElem IteratorLatime::element(){
-	/* de adaugat */
-	return -1;
+	if (!valid())
+		throw(exception());
+	return actual->element;
 }
 
+// Teta(1)
 void IteratorLatime::urmator(){
-	/* de adaugat */
+	if (!valid())
+		throw(exception());
+
+	PNod aux = q.back();
+	q.pop();
+	if (aux->dr != NULL)
+		q.push(aux->dr);
+	if (aux->st != NULL)
+		q.push(aux->st);
+
+	if (!q.empty())
+		actual = q.back();
+	else
+		actual = NULL;
 }

@@ -1,6 +1,22 @@
 #pragma once
 #include "AB.h"
+#include <queue>
+#include <stack>
 
+using namespace std;
+
+
+//PNod copiere(PNod p) 
+//{
+//	if (p != NULL) {
+//		//creez radacina
+//		PNod pNew = new Nod(p->element, NULL, NULL);
+//		pNew->st = copiere(p->st);
+//		pNew->dr = copiere(p->dr);
+//		return pNew;
+//	}
+//	return NULL;
+//}
 
 class IteratorAB {
 public:
@@ -29,7 +45,8 @@ private:
    	const AB& ab;
 
 	/* aici e reprezentarea specifica a itertorului*/
-
+	stack<PNod> s;
+	PNod actual;
 
 public:
 
@@ -124,6 +141,8 @@ private:
    const AB& ab;
  	/* aici e reprezentarea pecifica a itratorului*/
 
+   queue<PNod> q;
+   PNod actual;
 
 public:
 

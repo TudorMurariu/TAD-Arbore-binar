@@ -3,57 +3,135 @@
 #include <exception>
 #include <string>
 
-
+// Teta(1)
 AB::AB() {
-	/* de adaugat */
+	this->radacina = NULL;
 }
 
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
 AB::AB(const AB& ab) {
-	/* de adaugat */
+	this->radacina = copiere(ab.radacina);
 }
 
+// Teta(1)
 AB::AB(TElem e){
-	/* de adaugat */
+	this->radacina = new Nod(e, NULL, NULL);
 }
 
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
 AB::AB(const AB& st, TElem e, const AB& dr){
-    	/* de adaugat */
+	this->radacina = new Nod(e, copiere(st.radacina), copiere(dr.radacina));
 }
 
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
+PNod AB::copiere(PNod p) const {
+	if (p != NULL) {
+		//creez radacina
+		PNod pNew = new Nod(p->element, NULL, NULL);
+		pNew->st = copiere(p->st);
+		pNew->dr = copiere(p->dr);
+		return pNew;
+	}
+	return NULL;
+}
 
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
+void AB::distrugeSubarbori(PNod p) {
+	if (p != NULL) {
+		distruge(p->st);
+		distruge(p->dr);
+	}
+}
+
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
+void AB::distruge(PNod p) {
+	if (p != NULL) {
+		distruge(p->st);
+		distruge(p->dr);
+		delete p;
+	}
+}
+
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
 void AB::adaugaSubSt(const AB& st){
- 	/* de adaugat */
+	if (this->vid())
+		throw(exception());
+	// distrug vechii subarbori ai subarborelui stang
+	distrugeSubarbori(this->radacina->st);
+	//copiez noul subarbore
+	this->radacina->st = copiere(st.radacina);
 }
 
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
 void AB::adaugaSubDr(const AB& dr){
-	/* de adaugat */
+	if (this->vid())
+		throw(exception());
+	// distrug vechii subarbori ai subarborelui drept
+	distrugeSubarbori(this->radacina->dr);
+	//copiez noul subarbore
+	this->radacina->dr = copiere(dr.radacina);
 }
 
+// Teta(1)
 TElem AB::element() const{
- 	/* de adaugat */
-	return -1;
+	if (this->vid())
+		throw(exception());
+	return this->radacina->element;
 }
 
+// Teta(1)
 AB AB::stang() const{
- 	/* de adaugat */
-    return AB();
+	if (this->vid())
+		throw(exception());
+	AB ab;
+	ab.radacina = copiere(this->radacina->st);
+    return ab;
 }
 
+// Teta(1)
 AB AB::drept() const{
-	/* de adaugat */
-	return AB();
+	if (this->vid())
+		throw(exception());
+	AB ab;
+	ab.radacina = copiere(this->radacina->dr);
+	return ab;
 }
 
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
 AB::~AB() {
-	/* de adaugat */
+	distruge(this->radacina);
 }
 
+// Teta(1)
 bool AB::vid() const{
-	/* de adaugat */
-	return true;
+	return this->radacina == NULL;
 }
 
-
+// Teta(1)
 IteratorAB* AB::iterator(string s) const {
 	if (s=="preordine")
 		return new IteratorPreordine(*this);
