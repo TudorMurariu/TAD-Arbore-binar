@@ -1,26 +1,39 @@
 #include "AB.h"
 #include "IteratorAB.h"
 
+// Teta(1)
 IteratorInordine::IteratorInordine(const AB& _ab):ab(_ab) {
-	/* de adaugat */
+	actual = NULL;
+	prim();
 }
+
 
 void IteratorInordine::prim(){
-	/* de adaugat */
+	if (!valid())
+		throw(exception());
+	while (!s.empty())
+		s.pop();
+	actual = ab.radacina;
+	s.push(ab.radacina);
 }
 
+// Teta(1)
 bool IteratorInordine::valid(){
-	/* de adaugat */
-	return false;
+	return actual != NULL && !s.empty();
 }
+
 
 TElem IteratorInordine::element() {
-	/* de adaugat */
-	return -1;
+	if (!valid())
+		throw(exception());
+	return actual->element;
 }
 
+
 void IteratorInordine::urmator(){
-	/* de adaugat */
+	if (!valid())
+		throw(exception());
+
 }
 
 // Teta(1)
@@ -30,7 +43,10 @@ IteratorPreordine::IteratorPreordine(const AB& _ab):ab(_ab){
 	prim();
 }
 
-// Teta(1)
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
 void IteratorPreordine::prim(){
 	while (!s.empty())
 		s.pop();
@@ -101,7 +117,10 @@ IteratorLatime::IteratorLatime(const AB& _ab):ab(_ab){
 	q.push(_ab.radacina);
 }
 
-// Teta(1)
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
 void IteratorLatime::prim(){
 	while (!q.empty())
 		q.pop();
@@ -112,8 +131,8 @@ void IteratorLatime::prim(){
 bool IteratorLatime::valid(){
 	return actual != NULL;
 }
-// Teta(1)
 
+// Teta(1)
 TElem IteratorLatime::element(){
 	if (!valid())
 		throw(exception());
@@ -127,10 +146,10 @@ void IteratorLatime::urmator(){
 
 	PNod aux = q.back();
 	q.pop();
-	if (aux->dr != NULL)
-		q.push(aux->dr);
 	if (aux->st != NULL)
 		q.push(aux->st);
+	if (aux->dr != NULL)
+		q.push(aux->dr);
 
 	if (!q.empty())
 		actual = q.back();

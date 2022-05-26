@@ -79,7 +79,8 @@ private:
    const AB& ab;
    /* aici e reprezentarea specifica a iteratorului*/
 
-
+   stack<PNod> s;
+   PNod actual;
 
 public:
 
@@ -110,8 +111,8 @@ private:
 
 	const AB& ab;
 	/* aici e reprezentarea specifica a itertorului*/
-
-
+	
+	PNod actual;
 public:
 
 		//reseteaza pozitia iteratorului la inceputul containerului
