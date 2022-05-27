@@ -6,7 +6,7 @@
 
 using namespace std;
 
-
+// ayo
 int main() {
 	testAll();
 	cout << "Gata teste scurte\n";
