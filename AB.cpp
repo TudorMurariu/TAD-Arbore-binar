@@ -143,3 +143,40 @@ IteratorAB* AB::iterator(string s) const {
 		return new IteratorLatime(*this);
 	return nullptr;
 };
+
+// Complexitate :  Teta(n)
+/// caz favoranil : Teta(1) daca n e 1
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : Teta(n)
+int AB::dif_max_min()
+{
+	if (this->vid())
+		throw(exception());
+
+	// initializam min si max cu radacina
+	TElem mini = radacina->element, maxi = radacina->element;
+	// parcurgem arborele prim latime
+	queue<PNod> q;
+	// se adauga radacina in coada
+	q.push(radacina); 
+
+	// incepem bfs ul
+	while (!q.empty())
+	{
+		PNod aux = q.front();
+		q.pop();
+
+		if (aux->st != NULL)
+			q.push(aux->st);
+		if (aux->dr != NULL)
+			q.push(aux->dr);
+
+		if (aux->element > maxi)
+			maxi = aux->element;
+		if (aux->element < mini)
+			mini = aux->element;
+	}
+
+	return maxi - mini;
+}

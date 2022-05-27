@@ -4,3 +4,4 @@
 void testAllExtins();
 
 
+void test_nou();

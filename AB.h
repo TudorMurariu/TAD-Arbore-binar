@@ -92,5 +92,8 @@ public:
 
 		// destructorul arborelui binar
 		~AB();
+
+		/// gaseste dif deintre val min si val max
+		int dif_max_min();
 };
 

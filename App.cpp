@@ -12,6 +12,7 @@ int main() {
 	cout << "Gata teste scurte\n";
 	testAllExtins();
 	cout << "Gata teste extinse\n";
-
+	test_nou();
+	cout << "Gata test nou\n";
 	cout<<"End";
 }

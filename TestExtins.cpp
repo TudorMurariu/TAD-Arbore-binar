@@ -198,5 +198,20 @@ void testAllExtins() {
     }
 }
 
+// test func noua
+void test_nou()
+{
+    AB ab = creeazaArbore();
+    // 12 - 1 = 11
+    assert(ab.dif_max_min() == 11);
+
+    AB ab1 = creeazaArbore1();
+    // 8 - 1 = 7
+    assert(ab1.dif_max_min() == 7);
+
+    AB ab2 = creeazaArbore2();
+    // 8 - 1 = 7
+    assert(ab2.dif_max_min() == 7);
+}
 
 
