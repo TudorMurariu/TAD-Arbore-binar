@@ -1,14 +1,20 @@
 #include "AB.h"
 #include "IteratorAB.h"
 
-
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
 IteratorInordine::IteratorInordine(const AB& _ab):ab(_ab) {
 	actual = NULL;
 	actual = _ab.radacina;
 	prim();
 }
 
-
+/// caz favoranil : Teta(1)
+/// caz defavorabil : Teta(n)
+/// caz mediu : Teta(n)
+/// overall case : O(n)
 void IteratorInordine::prim(){
 	while (!s.empty())
 		s.pop();
@@ -37,7 +43,7 @@ TElem IteratorInordine::element() {
 	return actual->element;
 }
 
-
+// Teta(1)
 void IteratorInordine::urmator(){
 	if (!valid())
 		throw(exception());
@@ -137,20 +143,6 @@ void IteratorPostordine::prim(){ ///!
 		s.push(x);
 		actual.p = actual.p->st;
 	}
-
-	//el x = s.top();
-	//s.pop();
-	//if (x.k == 0)
-	//{
-	//	// nu s-a traversat subarborele drept al lui p
-	//	x.k = 1;
-	//	s.push(x);
-	//	actual.p = x.p->dr;
-	//}
-	//else
-	//{
-	//	//actual.p = NULL;
-	//}
 }
 
 // Teta(1)

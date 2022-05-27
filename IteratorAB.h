@@ -5,19 +5,6 @@
 
 using namespace std;
 
-
-//PNod copiere(PNod p) 
-//{
-//	if (p != NULL) {
-//		//creez radacina
-//		PNod pNew = new Nod(p->element, NULL, NULL);
-//		pNew->st = copiere(p->st);
-//		pNew->dr = copiere(p->dr);
-//		return pNew;
-//	}
-//	return NULL;
-//}
-
 class IteratorAB {
 public:
 
